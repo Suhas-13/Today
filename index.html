@@ -6,6 +6,12 @@
 	</head>
 	<body>
 		<script>
+			function displayAll(data){
+    var result = (data["items"][0]["summary"]);
+    result=result.fontsize(10000);
+    document.write("Tomorrow is a " + result);
+
+}
 			
 		var today = new Date();
 		var dd = today.getDate() ;
