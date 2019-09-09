@@ -9,7 +9,9 @@
 			function displayAll(data){
     var result = (data["items"][0]["summary"]);
     result=result.fontsize(10000);
-    document.write("Tomorrow is a " + result);
+    document.write(result);
+    document.title = result
+    document.write("<br></br><br></br><br></br>If today is not a schoolday(weekend or holiday), the day displayed above is what the next school day would be.");
 
 }
 			
