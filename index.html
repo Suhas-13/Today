@@ -28,24 +28,19 @@
 		var tomorrowVar = dd2.toISOString();
 		var otherTomorrowVar = otherTomorrowVar.toISOString();
 		var url = ("https://www.googleapis.com/calendar/v3/calendars/sas.edu.sg_59677quvvugr43j58tm4r23ang@group.calendar.google.com/events?key=AIzaSyCnJefaZN4-YhmiF1Zcpo4-qH3B5b30Ybk&&maxResults=1&singleEvents=true&orderBy=startTime&timeMin="+timeStart+"&&timeMax="+tomorrowVar);
-		var url2 = ("https://www.googleapis.com/calendar/v3/calendars/"+document.cookie.split(";")[0].split("=")[1]+"/events?key=AIzaSyCnJefaZN4-YhmiF1Zcpo4-qH3B5b30Ybk&&maxResults=2500&singleEvents=true&orderBy=startTime&timeMin="+timeStart+"&&timeMax="+otherTomorrowVar);
-		console.log(url2);
+		
 	
 		$.ajax({
         url: url,
         type: 'GET',
         dataType: "json",
-        success: displayAll
+        success: 
+			
     });
-	setTimeout(second,500);
-	function second() {
-		$.ajax({
-        url: url2,
-        type: 'GET',
-        dataType: "json",
-        success: displayAll2
-    });
-	}
+			
+	
+			
+			
 		</script>
 		
 	</body>
