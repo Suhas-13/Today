@@ -1,0 +1,98 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+<script src="jquery-3.3.1.min.js"></script>
+		<title> Your school day by Suhas Hariharan </title>
+	</head>
+	<body>
+		<script>
+			if (document.cookie==""){
+				function addCookie(data){
+					console.log(data);	
+					document.cookie = "url="+data.split("src=")[1].split("&")[0]+"; expires=Thu, 18 Dec 2200 12:00:00 UTC";
+					location.reload();
+		}
+				var x = document.write("<p> It appears that you are a new user. </br></br>To set this up here is what you need to do. This should take about 1-2 minutes to do</br></br>Step 1: Go <a target='_blank' href='https://sas.schoology.com/settings/account'>here</a> and login with your Google account. Then scroll down to where it says Share your schoology calendar and hit enable. Then copy the URL it will show there.<img src='https://i.imgur.com/MlcyO8S.png'</img></br></br>Step 2: Go <a target='_blank' href='https://calendar.google.com'>here</a>, click the three stacked dots next to the Add calendar text, then press From URL. Paste in the URL in the text field and select Make this calendar publicly accessible. Then hit add calendar.<img src='https://i.imgur.com/MWZO7Go.png'</img></br></br>Step 3: On the left side of your screen scroll through your calendars for a calendar named Schoology, press the 3 dots next to it and press settings, in the settings scroll down until you find the Public url for this calendar copy that and paste it into the text field on the bottom of this page<img src='https://i.imgur.com/BXBr2YY.png'</img></br></br>Done!</br></br>Now upon accessing day.suhas.space it will show everything you have for the week whenever you go there(homework, assesments etc).</p>");
+				document.write("Enter URL here after completing guide  <input id='submit'> </input");
+				document.write("</br></br></br></br><button onclick=addCookie(document.getElementById('submit').value)>Submit</button");
+				document.write("</br></br></br>If you encounter any issues or have any feature suggestions email me at hariharan774531@sas.edu.sg");
+			}
+			
+			
+		
+			else {
+		var today = new Date();
+		var dd = today.getDate() ;
+		var dd2 = new Date()
+		dd2.setDate(today.getDate() + 1)
+		
+		var otherTomorrowVar =  new Date()
+		 otherTomorrowVar.setDate(today.getDate()+7)
+		if (today.getDay() == 6) {
+			today.setDate(today.getDate()+2);
+			dd2.setDate(today.getDate()+2);
+		
+		}
+		if (today.getDay() == 0) {
+			today.setDate(today.getDate()+1);
+			dd2.setDate(today.getDate()+1);
+		}	
+		
+		var timeStart=today.toISOString();
+		var tomorrowVar = dd2.toISOString();
+		var otherTomorrowVar = otherTomorrowVar.toISOString();
+		var url = ("https://www.googleapis.com/calendar/v3/calendars/sas.edu.sg_59677quvvugr43j58tm4r23ang@group.calendar.google.com/events?key=AIzaSyCnJefaZN4-YhmiF1Zcpo4-qH3B5b30Ybk&&maxResults=1&singleEvents=true&orderBy=startTime&timeMin="+timeStart+"&&timeMax="+tomorrowVar);
+		var url2 = ("https://www.googleapis.com/calendar/v3/calendars/"+document.cookie.split(";")[0].split("=")[1]+"/events?key=AIzaSyCnJefaZN4-YhmiF1Zcpo4-qH3B5b30Ybk&&maxResults=2500&singleEvents=true&orderBy=startTime&timeMin="+timeStart+"&&timeMax="+otherTomorrowVar);
+		console.log(url2);
+	
+		$.ajax({
+        url: url,
+        type: 'GET',
+        dataType: "json",
+        success: displayAll
+    });
+	setTimeout(second,500);
+	function second() {
+		$.ajax({
+        url: url2,
+        type: 'GET',
+        dataType: "json",
+        success: displayAll2
+    });
+	}
+function displayAll(data){
+    var result = (data["items"][0]["summary"]);
+    result=result.fontsize(10000);
+    document.write(result);
+    document.write("<br/><br/><br/><br/>"); 
+    document.write("Agenda for the next week: ".fontsize(100000))
+}
+function displayAll2(data){
+	var arrayLength = data["items"].length;
+	for (var i = 0; i < arrayLength; i++) {
+        var result = (data["items"][i]["summary"]);
+    
+    document.write("<br/><br/><br/><br/>"); 
+    //result=result.fontsize(10000);
+    
+    document.write("<font size='100000'><a target='_blank' href="+data["items"][i]["htmlLink"]+">"+result);// 3 new lines!  My oh my!
+    if (typeof(data["items"][i]["end"]["date"]) == "undefined"){
+    	duedate=" is due on " + data["items"][i]["end"]["dateTime"]
+    duedate=duedate.fontsize(100000);
+    document.write(duedate);
+    }
+    else{
+    	duedate=" is due on " + data["items"][i]["end"]["date"]
+    duedate=duedate.fontsize(100000);
+    document.write(duedate);
+    }
+    
+        //Do something
+    }
+    
+}
+}
+		</script>
+		
+	</body>
+</html
